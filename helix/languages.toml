@@ -10,11 +10,25 @@ file-types = ["cpp", "cc", "cxx", "hpp", "hcc", "hxx"]
 formatter = { command = 'clang-format' }
 auto-format = true
 
+[[language]]
+name = "Makefile"
+scope = "Makefile"
+file-types = ["Makefile"]
 
 [[language]]
 name = "markdown"
 file-types = ["md"]
 language-servers = ["harper-ls"]
+
+[[language]]
+name = "javascript"
+formatter = { command = 'prettier', args = ["--parser", "javascript"] }
+auto-format = true
+
+[[language]]
+name = "typescript"
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+auto-format = true
 
 [language-server.harper-ls]
 command = "harper-ls"
