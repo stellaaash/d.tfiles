@@ -54,6 +54,10 @@
     };
   };
 
+  programs.claude-code = {
+    enable = true;
+  };
+
   programs.zed-editor = {
     enable = true;
 
