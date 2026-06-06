@@ -132,7 +132,6 @@
      man-pages-posix
      nixd
      nil
-     zellij
   ];
 
   programs.fish.enable = true;

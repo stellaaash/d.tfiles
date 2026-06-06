@@ -40,6 +40,14 @@
     settings.init.defaultbranch = "main";
   };
 
+  programs.zellij = {
+    enable = true;
+    settings = {
+      default_shell = "fish";
+      theme = "everforest-dark";
+    };
+  };
+
   programs.helix = {
     settings = {
       theme = "everforest_dark";
