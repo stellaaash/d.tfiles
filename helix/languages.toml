@@ -24,6 +24,18 @@ language-servers = ["harper-ls"]
 command = "vscode-eslint-language-server"
 args = ["--stdio"]
 
+# vscode-eslint-language-server does nothing without these settings (VS Code
+# normally supplies them). `validate = "on"` turns diagnostics on;
+# `workingDirectory.mode = "auto"` resolves eslint.config.mjs from the edited
+# file's nearest folder (needed since configs live in backend/ and frontend/).
+[language-server.eslint.config]
+validate = "on"
+run = "onType"
+problems = { shortenToSingleLine = false }
+nodePath = ""
+workingDirectory = { mode = "auto" }
+experimental = { useFlatConfig = true }
+
 [[language]]
 name = "javascript"
 language-servers = [ "typescript-language-server", "eslint" ]
