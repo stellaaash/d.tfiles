@@ -24,16 +24,25 @@ language-servers = ["harper-ls"]
 command = "vscode-eslint-language-server"
 args = ["--stdio"]
 
-# vscode-eslint-language-server does nothing without these settings (VS Code
-# normally supplies them). `validate = "on"` turns diagnostics on;
-# `workingDirectory.mode = "auto"` resolves eslint.config.mjs from the edited
-# file's nearest folder (needed since configs live in backend/ and frontend/).
+# vscode-eslint-language-server does almost no defensive checking and assumes
+# VS Code always supplies a complete settings object. Tested empirically by
+# driving the server and dropping one field at a time:
 #
-# IMPORTANT: `rulesCustomizations = []` and `experimental = {}` must be present
-# even though empty. The server iterates `settings.rulesCustomizations` and reads
-# `settings.experimental.useFlatConfig` while building each diagnostic; if either
-# is missing it throws internally and silently returns ZERO diagnostics (the CLI
-# `npm run lint` still works fine, which makes this very confusing to debug).
+# REQUIRED for diagnostics (removing any one breaks them):
+#   validate            - master on/off switch; without it -> 0 diagnostics
+#   rulesCustomizations - server iterates it per diagnostic; missing -> 0 (silent)
+#   problems            - read while building diagnostics; missing -> 0 (silent)
+#   experimental        - server reads .useFlatConfig; missing -> CRASH
+#   nodePath            - used in module path resolution; missing -> CRASH
+# The three "silent" ones are the nasty ones: empty list, no error, while the
+# CLI `npm run lint` keeps working fine. That mismatch is the debugging trap.
+#
+# NOT required for diagnostics, but kept on purpose:
+#   run             - only controls push-mode timing; irrelevant to pull mode.
+#   workingDirectory - diagnostics resolve fine without it (ESLint walks up from
+#                      the file's own dir), but it's needed for CODE ACTIONS
+#                      (eslint autofix) and cwd-relative behavior; a null value
+#                      crashes codeAction requests.
 [language-server.eslint.config]
 validate = "on"
 run = "onType"
