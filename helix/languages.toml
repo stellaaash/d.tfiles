@@ -28,13 +28,20 @@ args = ["--stdio"]
 # normally supplies them). `validate = "on"` turns diagnostics on;
 # `workingDirectory.mode = "auto"` resolves eslint.config.mjs from the edited
 # file's nearest folder (needed since configs live in backend/ and frontend/).
+#
+# IMPORTANT: `rulesCustomizations = []` and `experimental = {}` must be present
+# even though empty. The server iterates `settings.rulesCustomizations` and reads
+# `settings.experimental.useFlatConfig` while building each diagnostic; if either
+# is missing it throws internally and silently returns ZERO diagnostics (the CLI
+# `npm run lint` still works fine, which makes this very confusing to debug).
 [language-server.eslint.config]
 validate = "on"
 run = "onType"
 problems = { shortenToSingleLine = false }
 nodePath = ""
 workingDirectory = { mode = "auto" }
-experimental = { useFlatConfig = true }
+rulesCustomizations = []
+experimental = {}
 
 [[language]]
 name = "javascript"
