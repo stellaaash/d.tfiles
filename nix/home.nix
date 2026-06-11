@@ -16,6 +16,7 @@
     # Utilities
     obsidian
     vlc
+    ticktick
 
     # Games
     prismlauncher
