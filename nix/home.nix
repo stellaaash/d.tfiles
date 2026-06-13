@@ -48,6 +48,11 @@
     settings = {
       default_shell = "fish";
       theme = "everforest-dark";
+
+      pane_frames = true;
+      mouse_mode = true;
+      copy_on_select = true;
+      scrollback_editor = "hx";
     };
   };
 
