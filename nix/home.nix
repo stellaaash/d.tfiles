@@ -6,6 +6,8 @@
   home.username = "stellaaash";
   home.homeDirectory = "/home/stellaaash";
 
+  xsession.numlock.enable = false;
+
   home.packages = with pkgs; [
     kdePackages.kate
 
