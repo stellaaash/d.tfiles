@@ -267,6 +267,12 @@
       };
     };
   };
+
+  programs.lazygit = {
+    enable = true;
+
+    enableFishIntegration = true;
+  };
   
   home.stateVersion = "26.05";
 
