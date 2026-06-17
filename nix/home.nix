@@ -23,6 +23,7 @@
     # Games
     prismlauncher
     itch
+    r2modman
 
     # Editors
     zed-editor
