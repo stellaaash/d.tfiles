@@ -2,9 +2,13 @@
 
 {
   imports = [ inputs.nixcord.homeModules.nixcord ];
-  
+
   home.username = "stellaaash";
   home.homeDirectory = "/home/stellaaash";
+
+  # Set Helix configuration files
+  xdg.configFile."helix/config.toml".source = ./helix/config.toml;
+  xdg.configFile."helix/languages.toml".source = ./helix/languages.toml;
 
   xsession.numlock.enable = false;
 
@@ -54,12 +58,6 @@
       mouse_mode = true;
       copy_on_select = true;
       scrollback_editor = "hx";
-    };
-  };
-
-  programs.helix = {
-    settings = {
-      theme = "everforest_dark";
     };
   };
 
@@ -279,7 +277,7 @@
 
     enableFishIntegration = true;
   };
-  
+
   home.stateVersion = "26.05";
 
 }

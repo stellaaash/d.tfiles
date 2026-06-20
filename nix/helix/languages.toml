@@ -1,0 +1,79 @@
+[[language]]
+name = "c"
+file-types = ["c", "h"]
+formatter = { command = 'clang-format' }
+auto-format = true
+
+[[language]]
+name = "cpp"
+file-types = ["cpp", "cc", "cxx", "hpp", "hcc", "hxx"]
+formatter = { command = 'clang-format' }
+auto-format = true
+
+[[language]]
+name = "Makefile"
+scope = "Makefile"
+file-types = ["Makefile"]
+
+[[language]]
+name = "markdown"
+file-types = ["md"]
+language-servers = ["harper-ls"]
+
+[language-server.eslint]
+command = "vscode-eslint-language-server"
+args = ["--stdio"]
+
+# vscode-eslint-language-server does almost no defensive checking and assumes
+# VS Code always supplies a complete settings object. Tested empirically by
+# driving the server and dropping one field at a time:
+#
+# REQUIRED for diagnostics (removing any one breaks them):
+#   validate            - master on/off switch; without it -> 0 diagnostics
+#   rulesCustomizations - server iterates it per diagnostic; missing -> 0 (silent)
+#   problems            - read while building diagnostics; missing -> 0 (silent)
+#   experimental        - server reads .useFlatConfig; missing -> CRASH
+#   nodePath            - used in module path resolution; missing -> CRASH
+# The three "silent" ones are the nasty ones: empty list, no error, while the
+# CLI `npm run lint` keeps working fine. That mismatch is the debugging trap.
+#
+# NOT required for diagnostics, but kept on purpose:
+#   run             - only controls push-mode timing; irrelevant to pull mode.
+#   workingDirectory - diagnostics resolve fine without it (ESLint walks up from
+#                      the file's own dir), but it's needed for CODE ACTIONS
+#                      (eslint autofix) and cwd-relative behavior; a null value
+#                      crashes codeAction requests.
+[language-server.eslint.config]
+validate = "on"
+run = "onType"
+problems = { shortenToSingleLine = false }
+nodePath = ""
+workingDirectory = { mode = "auto" }
+rulesCustomizations = []
+experimental = {}
+
+[[language]]
+name = "javascript"
+language-servers = [ "typescript-language-server", "eslint" ]
+formatter = { command = 'prettier', args = ["--parser", "babel"] }
+auto-format = true
+
+[[language]]
+name = "typescript"
+language-servers = [ "typescript-language-server", "eslint" ]
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "json"
+formatter = { command = 'prettier', args = ["--parser", "json"] }
+
+# tsconfig.json matches Helix's jsonc language (glob "{t,j}sconfig.json"), not
+# json, so the formatter above doesn't apply to it.
+[[language]]
+name = "jsonc"
+formatter = { command = 'prettier', args = ["--parser", "json"] }
+
+[language-server.harper-ls]
+command = "harper-ls"
+args = ["--stdio"]
