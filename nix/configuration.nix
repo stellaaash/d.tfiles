@@ -76,7 +76,7 @@
   console.useXkbConfig = true;  # TTY console follows the xkb config
 
 
-  # Gaming stuff
+  # Gaming stuff (here because Steam can't be installed through home-manager)
   programs.gamemode.enable = true;
   ## Steam
   programs.steam = {
