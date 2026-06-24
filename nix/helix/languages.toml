@@ -52,27 +52,32 @@ workingDirectory = { mode = "auto" }
 rulesCustomizations = []
 experimental = {}
 
+# Pass the buffer's real filename via %{buffer_name} so Prettier picks the
+# parser AND discovers .prettierrc itself (both are filename-based). This is
+# what the CLI / CI does, so editor formatting matches `prettier --check`.
+# Notably it gives package.json the json-stringify parser (arrays one-per-line)
+# instead of plain json. Requires Helix's command-line expansions (PR #13429).
 [[language]]
 name = "javascript"
 language-servers = [ "typescript-language-server", "eslint" ]
-formatter = { command = 'prettier', args = ["--parser", "babel"] }
+formatter = { command = 'prettier', args = ["--stdin-filepath", "%{buffer_name}"] }
 auto-format = true
 
 [[language]]
 name = "typescript"
 language-servers = [ "typescript-language-server", "eslint" ]
-formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+formatter = { command = 'prettier', args = ["--stdin-filepath", "%{buffer_name}"] }
 auto-format = true
 
 [[language]]
 name = "json"
-formatter = { command = 'prettier', args = ["--parser", "json"] }
+formatter = { command = 'prettier', args = ["--stdin-filepath", "%{buffer_name}"] }
 
 # tsconfig.json matches Helix's jsonc language (glob "{t,j}sconfig.json"), not
 # json, so the formatter above doesn't apply to it.
 [[language]]
 name = "jsonc"
-formatter = { command = 'prettier', args = ["--parser", "json"] }
+formatter = { command = 'prettier', args = ["--stdin-filepath", "%{buffer_name}"] }
 
 [language-server.harper-ls]
 command = "harper-ls"
