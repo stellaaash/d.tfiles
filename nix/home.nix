@@ -9,6 +9,8 @@
   # Set Helix configuration files
   xdg.configFile."helix/config.toml".source = ./helix/config.toml;
   xdg.configFile."helix/languages.toml".source = ./helix/languages.toml;
+  # Set Zellij configuration file
+  xdg.configFile."zellij/config.kdl".source = ./zellij/config.kdl;
 
   xsession.numlock.enable = false;
 
@@ -20,6 +22,7 @@
     firefox
 
     # Utilities
+    zellij
     obsidian
     vlc
     ticktick
@@ -46,19 +49,6 @@
     settings.user.email = "aisling.fontaine@protonmail.com";
     settings.pull.rebase = true;
     settings.init.defaultbranch = "main";
-  };
-
-  programs.zellij = {
-    enable = true;
-    settings = {
-      default_shell = "fish";
-      theme = "everforest-dark";
-
-      pane_frames = true;
-      mouse_mode = true;
-      copy_on_select = true;
-      scrollback_editor = "hx";
-    };
   };
 
   programs.claude-code = {
