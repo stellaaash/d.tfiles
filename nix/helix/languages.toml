@@ -70,6 +70,18 @@ formatter = { command = 'prettier', args = ["--stdin-filepath", "%{buffer_name}"
 auto-format = true
 
 [[language]]
+name = "tsx"
+language-servers = [ "typescript-language-server", "eslint" ]
+formatter = { command = 'prettier', args = ["--stdin-filepath", "%{buffer_name}"] }
+auto-format = true
+
+[[language]]
+name = "jsx"
+language-servers = [ "typescript-language-server", "eslint" ]
+formatter = { command = 'prettier', args = ["--stdin-filepath", "%{buffer_name}"] }
+auto-format = true
+
+[[language]]
 name = "json"
 formatter = { command = 'prettier', args = ["--stdin-filepath", "%{buffer_name}"] }
 
