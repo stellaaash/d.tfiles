@@ -90,7 +90,7 @@
   users.users.stellaaash = {
     isNormalUser = true;
     description = "Aisling Fontaine";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout" "docker" ];
   };
 
   # Syncthing
@@ -99,6 +99,11 @@
     openDefaultPorts = true; # Open ports in the firewall for Syncthing. (NOTE: this will not open syncthing gui port)
     user = "stellaaash";
     dataDir = "/home/stellaaash/Documents";
+  };
+
+  # Docker
+  virtualisation.docker = {
+    enable = true;
   };
 
   # Allow unfree packages
