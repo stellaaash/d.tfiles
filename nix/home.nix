@@ -26,6 +26,7 @@
     obsidian
     vlc
     ticktick
+    libreoffice
 
     # Games
     prismlauncher
