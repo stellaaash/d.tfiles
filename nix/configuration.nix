@@ -140,7 +140,13 @@
      nil
   ];
 
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+    shellAliases = {
+      ls = "lsd";
+      ll = "ls -lArth";
+    };
+  };
   users.defaultUserShell = pkgs.fish;
 
   # This value determines the NixOS release from which the default
