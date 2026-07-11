@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -133,7 +133,9 @@
      wooting-udev-rules
      wootility
      flow-control
-     helix
+     # Helix from master (see flake input): release 25.07.1 lacks LSP pull
+     # diagnostics, which the current vscode-eslint-language-server requires.
+     inputs.helix.packages.${pkgs.system}.default
      man-pages
      man-pages-posix
      nixd

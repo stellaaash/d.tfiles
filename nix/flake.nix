@@ -14,11 +14,18 @@
 
     # Nixcord for Vencord sources
     nixcord.url = "github:FlameFlag/nixcord";
+
+    # Helix from master: LSP pull-diagnostics support (needed by the eslint
+    # language server from nixpkgs 26.05) is not in any release yet.
+    # No nixpkgs.follows on purpose: keeping helix's pinned nixpkgs lets the
+    # helix.cachix.org binary cache hit instead of rebuilding from source.
+    helix.url = "github:helix-editor/helix";
   };
 
   outputs = { nixpkgs, home-manager,... }@inputs: {
     # Please replace my-nixos with your hostname
     nixosConfigurations.himalayan-blue-poppy = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
       modules = [
         # Import the previous configuration.nix we used,
         # so the old configuration file still takes effect
