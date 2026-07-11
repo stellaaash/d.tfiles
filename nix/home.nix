@@ -239,11 +239,14 @@
 
     discord.vencord.enable = true;
 
-    # https://flameflag.github.io/nixcord/
+    # https://4evy.github.io/nixcord/
     config = {
       # Theme
       themeLinks = [
         "https://raw.githubusercontent.com/7eahaus/everforest/refs/heads/main/teaforest.theme.css"
+      ];
+      enabledThemes = [
+        "teaforest.theme.css"
       ];
       frameless = true;
 
@@ -254,11 +257,11 @@
         };
         betterSessions.enable = true;
         betterUploadButton.enable = true;
-        BlurNSFW.enable = true;
+        blurNsfw.enable = true;
         biggerStreamPreview.enable = true;
         dearrow.enable = true;
         favoriteGifSearch.enable = true;
-        LastFMRichPresence.enable = true;
+        lastFmRichPresence.enable = true;
       };
     };
   };
