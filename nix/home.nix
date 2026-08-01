@@ -260,8 +260,7 @@
         blurNsfw.enable = true;
         biggerStreamPreview.enable = true;
         dearrow.enable = true;
-        favoriteGifSearch.enable = true;
-        lastFmRichPresence.enable = true;
+        musicRichPresence.enable = true;
       };
     };
   };
