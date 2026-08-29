@@ -82,7 +82,7 @@
   services.xserver.xkb = {
     layout = "us,ch";     # primary then secondary
     variant = ",fr";  # variants match layouts by index
-    options = "grp:alt_shift_toggle"; # switch with Alt+Shift (choose another if preferred)
+    options = "grp:win_space_toggle"; # switch with Meta+Space (choose another if preferred)
   };
   console.useXkbConfig = true;  # TTY console follows the xkb config
 
