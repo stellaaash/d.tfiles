@@ -24,6 +24,7 @@
     # Utilities
     zellij
     obsidian
+    anytype
     vlc
     ticktick
     libreoffice
